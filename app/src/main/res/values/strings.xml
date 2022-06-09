@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">TestPractice</string>
+    <string name="button_to_change_text">Button to change text</string>
+    <string name="show_text">Show Text</string>
+    <string name="show_text_text_before_be_clicked">Not Yet Be Clicked.</string>
+    <string name="show_text_text_after_be_clicked">It had been clicked.</string>
 </resources>

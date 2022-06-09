@@ -1,7 +1,9 @@
 package com.rulhouse.testpractice
 
+import androidx.activity.ComponentActivity
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertTextEquals
+import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.performClick
@@ -11,17 +13,27 @@ import org.junit.Test
 class MyComposeTest {
 
     @get:Rule
-    val composeTestRule = createComposeRule()
+    val composeTestRule = createAndroidComposeRule<ComponentActivity>()
+
+    private val activity by lazy { composeTestRule.activity }
 
     @Test
-    fun myTest() {
+    fun testButtonClick() {
         composeTestRule.setContent {
             MainScreen()
         }
-        composeTestRule.onNodeWithContentDescription("Add to favorites")
+        clickButton()
+        assertShowText()
+    }
+
+    private fun clickButton() {
+        composeTestRule.onNodeWithContentDescription(activity.getString(R.string.button_to_change_text))
             .performClick()
-        composeTestRule.onNodeWithContentDescription("Text which is clicked")
-            .assertTextEquals("It had been clicked.")
+    }
+
+    private fun assertShowText() {
+        composeTestRule.onNodeWithContentDescription(activity.getString(R.string.show_text))
+            .assertTextEquals(activity.getString(R.string.show_text_text_after_be_clicked))
     }
 
 }
